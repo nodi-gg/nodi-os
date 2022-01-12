@@ -12,10 +12,9 @@
 #overscan_top=16
 #overscan_bottom=16
 
-# uncomment to force a console size. By default it will be display's size minus
-# overscan.
-#framebuffer_width=1280
-#framebuffer_height=720
+# Force console size of 1280x720 to prevent unreadable letters on 4K screens
+framebuffer_width=1280
+framebuffer_height=720
 
 # uncomment if hdmi display is not detected and composite is being output
 #hdmi_force_hotplug=1
@@ -49,8 +48,11 @@
 
 # Additional overlays and parameters are documented /boot/overlays/README
 
-# Enable audio (loads snd_bcm2835)
-dtparam=audio=on
+# Disable audio, this pi is not for music
+dtparam=audio=off
+
+# Enable Serial console
+enable_uart=1
 
 # Automatically load overlays for detected cameras
 camera_auto_detect=1
@@ -81,3 +83,5 @@ otg_mode=1
 arm_boost=1
 
 [all]
+# Disable rainbow screen
+disable_splash=1
