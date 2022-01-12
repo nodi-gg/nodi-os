@@ -42,6 +42,32 @@ maintenance and allows for more easy customization.
    in with more essential packages presently, though they need not be with
    pi-gen.  
 
+## Test image with QEMU
+
+In Docker:
+
+`docker run -it -v image.img:/sdcard/filesystem.img lukechilds/dockerpi pi3`
+
+"Native":
+
+````
+qemu-system-aarch64 \
+  -M raspi3 \
+  -usb
+  -append "rw earlyprintk loglevel=8  dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootdelay=1" \
+  -dtb bcm2710-rpi-3-b-plus.dtb \
+  -sd ../2022-01-12-nodi-os.img \
+  -kernel kernel8.img \
+  -m 1G \
+  -smp 4  \
+  -serial stdio 
+````
+
+Also see:
+- https://github.com/dhruvvyas90/qemu-rpi-kernel
+- https://github.com/dhruvvyas90/qemu-rpi-kernel/wiki/Native-emulation-of-Rpi2-or-3-using-Qemu's-Raspi2-or-Raspi3-machine
+
+
 ## Skipping stages to speed up development
 
 If you're working on a specific stage the recommended development process is as
